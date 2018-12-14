@@ -1,9 +1,9 @@
-#smdr
+# smdr
 Golang package for extracting and parse SMDR data from NEC SV8100 PBX systems.
 
-##Usage
+## Usage
 
-###Install package
+### Install package
 `go get -v github.com/anmaslov/smdr/`
 
 ### Creating a client
@@ -49,4 +49,10 @@ if wr, err := conn.Write([]byte(r4)); //request #4
     log.Fatal(err)
 }
 ``` 
+More examples is coming soon.
 
+## Tests
+Only tested on the NEC SV8300.
+
+## License
+**SMDR package** is released under the [MIT License](http://opensource.org/licenses/mit-license.php).
