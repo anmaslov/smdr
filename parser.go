@@ -37,7 +37,7 @@ type CDR struct {
 }
 
 // parse raw data from PBX system
-func (r *CDR) parser(b []byte) error {
+func (r *CDR) Parser(b []byte) error {
 
 	r.length = string(b[2:7])
 	s := string(b[9:10])

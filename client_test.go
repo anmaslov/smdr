@@ -8,7 +8,7 @@ var tests = Request{sync: 22, ident: '1',
 
 func TestData(t *testing.T) {
 
-	data := dataRequest()
+	data := DataRequest()
 
 	if tests != data {
 		t.Error("Expected data, got", data)
@@ -17,7 +17,7 @@ func TestData(t *testing.T) {
 
 func TestSetRequestData(t *testing.T)  {
 	test := []byte{22, 49, 48, 48, 48, 48, 50, 48, 48, 252}
-	req := setRequest(tests)
+	req := SetRequest(tests)
 
 	if len(test) != len(req) {
 		t.Error("Len of slice is expected", req)

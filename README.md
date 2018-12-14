@@ -36,7 +36,7 @@ if err != nil{
 
 //trying parse data
 res := CDR{}
-err = res.parser(buff[:rd])
+err = res.Parser(buff[:rd])
 if err != nil {
     log.Fatal(err)
 }

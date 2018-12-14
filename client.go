@@ -15,7 +15,7 @@ type Request struct{
 }
 
 // ident 1 request for get data from PBX
-func dataRequest() (Request){
+func DataRequest() (Request){
 	var params Request
 	params.sync = 22; //Synchronization Character
 	params.ident = '1' //Identifier Kind
@@ -27,7 +27,7 @@ func dataRequest() (Request){
 }
 
 // ident 4 client response
-func clientResponse(seq int) Request {
+func ClientResponse(seq int) Request {
 	var params Request
 	params.sync = 22;
 	params.ident = '4'
@@ -40,7 +40,7 @@ func clientResponse(seq int) Request {
 	return params
 }
 //ident 6 connection Disconnect
-func clientDisconect() Request {
+func ClientDisconect() Request {
 	var params Request
 	params.sync = 22;
 	params.ident = '6'
@@ -53,7 +53,7 @@ func clientDisconect() Request {
 }
 
 // prepare to send request to PBX system
-func setRequest(p Request) []byte {
+func SetRequest(p Request) []byte {
 	var res []byte
 	res = append(res, byte(p.sync))
 	res = append(res, byte(p.ident))
