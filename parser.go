@@ -5,43 +5,43 @@ import (
 	"strconv"
 )
 
-type conversation struct {
-	year string
-	month string
-	day string
-	hour string
-	minute string
-	second string
+type Conversation struct {
+	Year   string
+	Month  string
+	Day    string
+	Hour   string
+	Minute string
+	Second string
 }
 
 type CDR struct {
-	length 		string
-	sequence 	int
-	tp 			string
+	Length   		string
+	Sequence 		int
+	Tp       		string
 
-	trunkOut 	string
-	trunkInc 	string
+	TrunkOut 		string
+	TrunkInc 		string
 
-	id       	string
-	tenant   	string
-	called   	string
-	cvsStart 	conversation
-	cvsEnd   	conversation
+	Id       		string
+	Tenant   		string
+	Called   		string
+	CvsStart 		Conversation
+	CvsEnd   		Conversation
 
-	tenantTwo    string
-	condition    string
-	route1       string
-	route2       string
-	phone        string
-	callMetering string
+	TenantTwo    	string
+	Condition    	string
+	Route1       	string
+	Route2       	string
+	Phone        	string
+	CallMetering 	string
 }
 
 // parse raw data from PBX system
 func (r *CDR) Parser(b []byte) error {
 
-	r.length = string(b[2:7])
+	r.Length = string(b[2:7])
 	s := string(b[9:10])
-	r.sequence, _ = strconv.Atoi((s))
+	r.Sequence, _ = strconv.Atoi((s))
 
 	if len(b) < 12 {
 		return errors.New("can't parse responded data")
@@ -49,35 +49,35 @@ func (r *CDR) Parser(b []byte) error {
 
 	b = b[12:]
 
-	r.tp = string(b[2:3])
-	r.trunkOut = string(b[3:6])
-	r.trunkInc = string(b[6:9])
-	r.id = string(b[9:10])
-	r.tenant = string(b[10:12])
-	r.called = string(b[12:18])
+	r.Tp = string(b[2:3])
+	r.TrunkOut = string(b[3:6])
+	r.TrunkInc = string(b[6:9])
+	r.Id = string(b[9:10])
+	r.Tenant = string(b[10:12])
+	r.Called = string(b[12:18])
 
-	r.tenantTwo = string(b[48:51])
-	r.condition = string(b[51:54])
+	r.TenantTwo = string(b[48:51])
+	r.Condition = string(b[51:54])
 
-	r.route1 = string(b[54:57])
-	r.route2 = string(b[57:60])
-	r.phone = string(b[60:71])
+	r.Route1 = string(b[54:57])
+	r.Route2 = string(b[57:60])
+	r.Phone = string(b[60:71])
 
-	r.cvsStart.year = string(b[114:116])
-	r.cvsStart.month = string(b[18:20])
-	r.cvsStart.day = string(b[20:22])
-	r.cvsStart.hour = string(b[22:24])
-	r.cvsStart.minute = string(b[24:26])
-	r.cvsStart.second = string(b[26:28])
+	r.CvsStart.Year = string(b[114:116])
+	r.CvsStart.Month = string(b[18:20])
+	r.CvsStart.Day = string(b[20:22])
+	r.CvsStart.Hour = string(b[22:24])
+	r.CvsStart.Minute = string(b[24:26])
+	r.CvsStart.Second = string(b[26:28])
 
-	r.cvsEnd.year = string(b[116:118])
-	r.cvsEnd.month = string(b[28:30])
-	r.cvsEnd.day = string(b[30:32])
-	r.cvsEnd.hour = string(b[32:34])
-	r.cvsEnd.minute = string(b[34:36])
-	r.cvsEnd.second = string(b[36:38])
+	r.CvsEnd.Year = string(b[116:118])
+	r.CvsEnd.Month = string(b[28:30])
+	r.CvsEnd.Day = string(b[30:32])
+	r.CvsEnd.Hour = string(b[32:34])
+	r.CvsEnd.Minute = string(b[34:36])
+	r.CvsEnd.Second = string(b[36:38])
 
-	r.callMetering = string(b[92:96])
+	r.CallMetering = string(b[92:96])
 
 	return nil
 }
