@@ -61,7 +61,7 @@ func (r *CDR) Parser(b []byte) error {
 
 	r.Route1 = string(b[54:57])
 	r.Route2 = string(b[57:60])
-	r.Phone = string(b[60:71])
+	r.Phone = string(b[60:92])
 
 	r.CvsStart.Year = string(b[114:116])
 	r.CvsStart.Month = string(b[18:20])
