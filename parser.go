@@ -3,6 +3,7 @@ package smdr
 import (
 	"errors"
 	"strconv"
+	"strings"
 )
 
 type Conversation struct {
@@ -78,6 +79,11 @@ func (r *CDR) Parser(b []byte) error {
 	r.CvsEnd.Second = string(b[36:38])
 
 	r.CallMetering = string(b[92:96])
+
+	//Extended NEAX 2400 IMS Format
+	if len(b) > 163 && len(strings.Trim(r.Phone, " ")) == 0 {
+		r.Phone = string(b[131:163])
+	}
 
 	return nil
 }
