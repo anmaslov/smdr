@@ -16,28 +16,28 @@ type Conversation struct {
 }
 
 type CDR struct {
-	Length   		string
-	Sequence 		int
-	Tp       		string
+	Length   string
+	Sequence int
+	Tp       string
 
-	TrunkOut 		string
-	TrunkInc 		string
+	TrunkOut string
+	TrunkInc string
 
-	Id       		string
-	Tenant   		string
-	Called   		string
-	CvsStart 		Conversation
-	CvsEnd   		Conversation
+	Id       string
+	Tenant   string
+	Called   string
+	CvsStart Conversation
+	CvsEnd   Conversation
 
-	TenantTwo    	string
-	Condition    	string
-	Route1       	string
-	Route2       	string
-	Phone        	string
-	CallMetering 	string
+	TenantTwo    string
+	Condition    string
+	Route1       string
+	Route2       string
+	Phone        string
+	CallMetering string
 }
 
-// parse raw data from PBX system
+//Parser parse raw data from PBX system
 func (r *CDR) Parser(b []byte) error {
 
 	r.Length = string(b[2:7])

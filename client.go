@@ -4,32 +4,32 @@ package smdr
 //Used for error detection
 type Parity byte
 
-type Request struct{
-	sync byte
-	ident rune
-	len [5]rune
+type Request struct {
+	sync   byte
+	ident  rune
+	len    [5]rune
 	device [2]rune
-	seq byte
-	ack byte
+	seq    byte
+	ack    byte
 	parity Parity
 }
 
-// ident 1 request for get data from PBX
-func DataRequest() (Request){
+//DataRequest ident 1 request for get data from PBX
+func DataRequest() Request {
 	var params Request
-	params.sync = 22; //Synchronization Character
-	params.ident = '1' //Identifier Kind
+	params.sync = 22                  //Synchronization Character
+	params.ident = '1'                //Identifier Kind
 	params.device = [2]rune{'0', '0'} //Device Number
-	params.parity = 252 //Parity Byte
+	params.parity = 252               //Parity Byte
 	params.len = [5]rune{'0', '0', '0', '0', '2'}
 
 	return params
 }
 
-// ident 4 client response
+//ClientResponse ident 4 client response
 func ClientResponse(seq int) Request {
 	var params Request
-	params.sync = 22;
+	params.sync = 22
 	params.ident = '4'
 	params.device = [2]rune{'0', '0'}
 	params.parity = 200
@@ -39,10 +39,11 @@ func ClientResponse(seq int) Request {
 
 	return params
 }
-//ident 6 connection Disconnect
+
+//ClientDisconect ident 6 connection Disconnect
 func ClientDisconect() Request {
 	var params Request
-	params.sync = 22;
+	params.sync = 22
 	params.ident = '6'
 	params.device = [2]rune{'0', '0'}
 	params.parity = 252
@@ -52,13 +53,13 @@ func ClientDisconect() Request {
 	return params
 }
 
-// prepare to send request to PBX system
+//SetRequest prepare to send request to PBX system
 func SetRequest(p Request) []byte {
 	var res []byte
 	res = append(res, byte(p.sync))
 	res = append(res, byte(p.ident))
 
-	for _, value := range p.len{
+	for _, value := range p.len {
 		res = append(res, byte(value))
 	}
 
