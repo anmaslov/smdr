@@ -6,6 +6,7 @@ import (
 	"strings"
 )
 
+// Conversation datetime structure
 type Conversation struct {
 	Year   string
 	Month  string
@@ -15,6 +16,7 @@ type Conversation struct {
 	Second string
 }
 
+// CDR structure for response from pbx
 type CDR struct {
 	Length   string
 	Sequence int
@@ -37,12 +39,12 @@ type CDR struct {
 	CallMetering string
 }
 
-//Parser parse raw data from PBX system
+// Parser parse raw data from PBX system
 func (r *CDR) Parser(b []byte) error {
 
 	r.Length = string(b[2:7])
 	s := string(b[9:10])
-	r.Sequence, _ = strconv.Atoi((s))
+	r.Sequence, _ = strconv.Atoi(s)
 
 	if len(b) < 12 {
 		return errors.New("can't parse responded data")

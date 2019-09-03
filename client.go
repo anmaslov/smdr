@@ -1,9 +1,10 @@
 // Package smdr provided for extracting SMDR data from NEC SV8100 PBX systems.
 package smdr
 
-//Used for error detection
+// Parity used for error detection
 type Parity byte
 
+// Request to pbx
 type Request struct {
 	sync   byte
 	ident  rune
@@ -14,7 +15,7 @@ type Request struct {
 	parity Parity
 }
 
-//DataRequest ident 1 request for get data from PBX
+// DataRequest ident 1 request for get data from PBX
 func DataRequest() Request {
 	var params Request
 	params.sync = 22                  //Synchronization Character
@@ -26,7 +27,7 @@ func DataRequest() Request {
 	return params
 }
 
-//ClientResponse ident 4 client response
+// ClientResponse ident 4 client response
 func ClientResponse(seq int) Request {
 	var params Request
 	params.sync = 22
@@ -40,7 +41,7 @@ func ClientResponse(seq int) Request {
 	return params
 }
 
-//ClientDisconect ident 6 connection Disconnect
+// ClientDisconect ident 6 connection Disconnect
 func ClientDisconect() Request {
 	var params Request
 	params.sync = 22
@@ -53,7 +54,7 @@ func ClientDisconect() Request {
 	return params
 }
 
-//SetRequest prepare to send request to PBX system
+// SetRequest prepare to send request to PBX system
 func SetRequest(p Request) []byte {
 	var res []byte
 	res = append(res, byte(p.sync))
