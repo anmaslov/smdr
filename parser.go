@@ -1,7 +1,7 @@
 package smdr
 
 import (
-	"errors"
+	"fmt"
 	"strconv"
 	"strings"
 )
@@ -39,6 +39,11 @@ type CDR struct {
 	CallMetering string
 }
 
+// New create new blank cdr structure
+func New() *CDR {
+	return &CDR{}
+}
+
 // Parser parse raw data from PBX system
 func (r *CDR) Parser(b []byte) error {
 
@@ -47,7 +52,7 @@ func (r *CDR) Parser(b []byte) error {
 	r.Sequence, _ = strconv.Atoi(s)
 
 	if len(b) < 12 {
-		return errors.New("can't parse responded data")
+		return fmt.Errorf("can't parse responded data")
 	}
 
 	b = b[12:]

@@ -10,7 +10,8 @@ type Request struct {
 	sync byte
 	// Identifier Kind
 	ident rune
-	len   [5]rune
+	// Len query
+	len [5]rune
 	// Device Number
 	device [2]rune
 	seq    byte
@@ -23,7 +24,7 @@ type Request struct {
 func DataRequest() *Request {
 	return &Request{
 		sync:   22,
-		ident:  1,
+		ident:  '1',
 		len:    [5]rune{'0', '0', '0', '0', '2'},
 		device: [2]rune{'0', '0'},
 		parity: 252,
@@ -56,9 +57,9 @@ func ClientDisconnect() *Request {
 }
 
 // SetRequest prepare to send request to PBX system
-func SetRequest(p Request) []byte {
+func SetRequest(p *Request) []byte {
 	var res []byte
-	res = append(res, byte(p.sync))
+	res = append(res, p.sync)
 	res = append(res, byte(p.ident))
 
 	for _, value := range p.len {
@@ -69,7 +70,7 @@ func SetRequest(p Request) []byte {
 	res = append(res, byte(p.device[1]))
 
 	if p.seq != 0 {
-		res = append(res, byte(p.seq))
+		res = append(res, p.seq)
 	}
 
 	if p.ack != 0 {
