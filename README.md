@@ -1,5 +1,7 @@
-# smdr
+# Smdr
 Golang package for extracting and parse SMDR data from NEC SV8100 PBX systems.
+
+[![Build Status](https://travis-ci.org/anmaslov/smdr.svg?branch=master)](https://travis-ci.org/anmaslov/smdr)
 
 ## Usage
 
