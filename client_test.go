@@ -67,3 +67,24 @@ func TestSetRequestData(t *testing.T) {
 		t.Error("Len of slice is expected", req)
 	}
 }
+
+// TestSetRequestData test set request data
+func TestSetRequestDataExtend(t *testing.T) {
+	test := []byte{22, 49, 48, 48, 48, 48, 50, 48, 48, 1, 1, 252}
+
+	var requestDataExt = &Request{
+		sync:   22,
+		ident:  '1',
+		device: [2]rune{'0', '0'},
+		parity: 252,
+		seq:    1,
+		ack:    1,
+		len:    [5]rune{'0', '0', '0', '0', '2'},
+	}
+
+	req := SetRequest(requestDataExt)
+
+	if len(test) != len(req) {
+		t.Error("Len of slice is expected", req)
+	}
+}
