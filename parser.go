@@ -46,16 +46,19 @@ func New() *CDR {
 
 // Parser parse raw data from PBX system
 func (r *CDR) Parser(b []byte) error {
+	if len(b) < 12 {
+		return fmt.Errorf("can't parse responded data")
+	}
 
 	r.Length = string(b[2:7])
 	s := string(b[9:10])
 	r.Sequence, _ = strconv.Atoi(s)
 
-	if len(b) < 12 {
-		return fmt.Errorf("can't parse responded data")
-	}
-
 	b = b[12:]
+
+	if len(b) < 118 {
+		return fmt.Errorf("can't parse responded call data")
+	}
 
 	r.Tp = string(b[2:3])
 	r.TrunkOut = string(b[3:6])
