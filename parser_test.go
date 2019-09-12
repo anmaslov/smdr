@@ -44,7 +44,7 @@ func TestParser(t *testing.T) {
 		32, 32, 32, 32, 32, 32, 32, 32, 32, 32,
 		32, 32, 32, 32, 32, 32, 32, 32, 32, 32}
 	p := New()
-	p.Parser(b)
+	_ = p.Parser(b)
 
 	testData := &CDR{
 		Length:   "00002",
